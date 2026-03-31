@@ -16,14 +16,11 @@ jobs:
       - name: "check containers"
         run: docker ps
 
-      - name: "wait containers"
-        run: sleep 15
-
       - name: "install require"
-        run: docker exec -t study-web-2026-php-1 composer install
+        run: docker exec -t study-web-2026-php-1 ../composer install
 
       - name: "run tests"
-        run: docker exec study-web-2026-php-1 vendor/bin/phpunit
+        run: docker exec study-web-2026-php-1 ../vendor/bin/phpunit
 
       - name: "stop containers"
         if: always()
