@@ -17,6 +17,8 @@ services:
       - ./code/:/var/www/html
       - ./vendor/:/var/www/html/vendor
       - ./tests/:/var/www/html/tests
+      - ./composer.json:/var/www/html/composer.json
+      - ./composer.lock:/var/www/html/composer.lock
     depends_on:
       - db
       - redis
