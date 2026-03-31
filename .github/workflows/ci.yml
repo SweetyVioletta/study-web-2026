@@ -16,8 +16,12 @@ jobs:
       - name: "check containers"
         run: docker ps
 
+      - name: "install dependencies"
+        run: docker compose exec -T php composer install
+
+
       - name: "run tests"
-        run: docker exec -t study-web-2026-php-1  /var/www/html/vendor/bin/phpunit
+        run: docker exec -t study-web-2026-php-1  /var/www/html/vendor/bin/phpunit tests
 
       - name: "stop containers"
         if: always()
