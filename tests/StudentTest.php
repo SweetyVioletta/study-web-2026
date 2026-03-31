@@ -1,7 +1,7 @@
 <?php
 
 namespace tests;
-require_once "code/Student.php";
+require_once "../code/Student.php";
 
 use PDO;
 use PDOStatement;
