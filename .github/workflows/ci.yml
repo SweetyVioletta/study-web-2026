@@ -1,0 +1,25 @@
+name: PHP docker CI
+on:
+  push:
+    branches: [ main ]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: clone repo
+        uses: actions/checkout@v3
+
+      - name: start docker
+        uses: docker compose up -d --build
+
+      - name: sleep
+        uses: sleep 10
+
+      - name: install require
+        uses: docker exec lab5_php composer install
+
+      - name: run tests
+        uses: docker exec lab5_php vendor/bin/phpunit
+
+      - name: stop containers
+        uses: docker compose down
