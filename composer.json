@@ -1,0 +1,22 @@
+{
+    "name": "violettakolomoets/2026web",
+    "autoload": {
+        "psr-4": {
+            "Violettakolomoets\\2026web\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Violetta Kolomoets",
+            "email": "violetta.starovojtova@yandex.ru"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.10",
+      "ext-pdo": "*",
+        "predis/predis": "^3.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^13.0"
+    }
+}

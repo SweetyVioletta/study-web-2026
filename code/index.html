@@ -1,0 +1,79 @@
+<html>
+<head>
+    <style>
+        form {
+            width: 300px;
+            margin: 20px auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+        form.loaded {
+            opacity: 1;
+        }
+        input, select, button {
+            margin: 5px 0;
+            width: 100%;
+            padding: 5px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        button:hover {
+            background: #45A049;
+        }
+    </style>
+</head>
+<body>
+    <form id="demoForm" action="process.php" method="post">
+        <input type="text" name="username" placeholder="Name">
+        <input type="number" name="age" placeholder="Age">
+        <select name = "city">
+            <option value = "kaliningrad">Kaliningrad</option>
+            <option value = "moscow">Moscow</option>
+            <option value = "novosibirsk">Novosib</option>
+        </select>
+        <input type= "checkbox" name = "subscribe"> Subscribe
+        <input type="radio" name = "gender" value="male"> Male
+        <input type="radio" name = "gender" value="female"> Female
+        <button type= "submit">Send</button>
+    </form>
+
+<div id = "result"></div>
+<div id = "quoteBlock">
+    <p id = "quoteText"></p>
+    <p id = "quoteAuthor"></p>
+</div>
+<button id = "updateBtn">Refresh quote</button>
+
+<script>
+    window.onload = function () {
+        document.querySelector("form").classList.add("loaded");
+    }
+    document.getElementById("demoForm").addEventListener("submit", function (e) {
+        // e.preventDefault();
+        const formData = new FormData(this);
+        let output = "";
+        for (const [name, value] of formData.entries()) {
+            output += `<p> <b>${name}:</b> ${value} </p>`;
+        }
+        document.getElementById("result").innerHTML = output;
+    });
+    document.getElementById("updateBtn").addEventListener("click", function () {
+        fetch('quotes.php')
+            .then(response => response.text())
+            .then(data => {
+                const tempDiv = document.createElement("div");
+                tempDiv.innerHTML = data;
+                document.getElementById("quoteText").innerText = tempDiv.querySelector("p").innerText;
+                document.getElementById("quoteAuthor").innerText = tempDiv.querySelector("em").innerText;
+            });
+    });
+</script>
+</body>
+</html>
